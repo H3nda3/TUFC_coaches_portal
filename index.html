@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>My Enhanced Webpage</title>
+  <title>TUFC Coaches Portal</title>
   <style>
     :root{--bg:#FFFFCC;--card:#002060;--text:#FFF;--muted:#555;--accent:#6c63ff}
     [data-theme='dark']{--bg:#002060;--card:#FFFF00;--text:#002060;--muted:#9aa0b4;--accent:#8b82ff}
@@ -25,10 +25,9 @@
 <body data-theme="light">
   <header class="card" style="border-radius:0 0 12px 12px;">
     <div class="brand">
-      <div class="logo">ME</div>
+      <div class="logo">TUFC</div>
       <div>
-        <div style="font-weight:700">My Enhanced Webpage</div>
-        <div style="font-size:12px;color:var(--muted)">Static webpage with dropdown lists</div>
+        <div style="font-weight:700">TUFC Coaches Portal</div>
       </div>
     </div>
     <button id="toggleTheme" class="btn ghost">Toggle theme</button>
@@ -45,7 +44,7 @@
 <div id="features">
         <div class="card">
           <h4>MATCH INFORMATION</h4>
-          <select onchange="if(this.value) window.open(this.value, '_blank');">
+          <select class="link-select">
             <option selected disabled>Choose a link</option>
             <option value="https://www.northumberlandfootballleagues.co.uk/">Football League</option>
             <option value="https://www.northumberlandfootballleagues.co.uk/copy-of-office-hours-3">Fixture Secretary</option>
@@ -62,7 +61,7 @@
         </div>
         <div class="card">
           <h4>ADMINISTRATION</h4>
-          <select onchange="if(this.value) window.open(this.value, '_blank');">
+          <select class="link-select">
             <option selected disabled>Choose a link</option>
             <option value="https://www.tynemouthunitedfc.co.uk/">TUFC Club website</option>
             <option value="https://forms.gle/YB89FKa5PnG1FJDy7">New player request</option>
@@ -73,7 +72,7 @@
         </div>
         <div class="card">
           <h4>DEVELOPMENT</h4>
-          <select onchange="if(this.value) window.open(this.value, '_blank');">
+          <select class="link-select">
             <option selected disabled>Choose a link</option>
             <option value="https://learn.englandfootball.com/courses?category=football">Online courses</option>
             <option value="https://www.soccerdrive.com/free-downloadable-soccer-resources">Coaching Session planner</option>
@@ -83,7 +82,7 @@
         </div>
         <div class="card">
           <h4>DOCUMENTS</h4>
-          <select onchange="if(this.value) window.open(this.value, '_blank');">
+          <select class="link-select">
             <option selected disabled>Choose a link</option>
             <option value="https://www.pitchero.com/document-download/552/310106">How to Print the team squad list</option>
             <option value="https://www.pitchero.com/document-download/552/302997">Printable PDF registration guide</option>
@@ -93,7 +92,7 @@
         </div>
         <div class="card">
           <h4>REQUESTS</h4>
-          <select onchange="if(this.value) window.open(this.value, '_blank');">
+          <select class="link-select">
             <option selected disabled>Choose a link</option>
             <option value="https://www.clubwebshop.com/a-z/clubs/tynemouthunitedjfc/">Club shop</option>
             <option value="https://forms.gle/Qqqaupubstz6fC3F8">Equipment</option>
@@ -108,7 +107,7 @@
         </div>
         <div class="card">
           <h4>WELFARE</h4>
-          <select onchange="if(this.value) window.open(this.value, '_blank');">
+          <select class="link-select">
             <option selected disabled>Choose a link</option>
             <option value="https://www.pitchero.com/document-download/552/408517">Coaches Handbook</option>
             <option value="https://www.pitchero.com/document-download/552/255003">Accident Report form</option>
@@ -126,16 +125,23 @@
     </section>
   </main>
 
-  <footer>
-    Made with ♥ — enhanced static webpage template with dropdown lists.
-  </footer>
-
   <script>
     const body = document.body;
     const toggleTheme = document.getElementById('toggleTheme');
     toggleTheme.addEventListener('click', ()=>{
       const current = body.getAttribute('data-theme');
       body.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    });
+
+    document.querySelectorAll('.link-select').forEach(sel => {
+      sel.addEventListener('change', e => {
+        const url = e.target.value;
+        if (!url) return;
+        // same-tab navigation avoids pop-up blockers
+        window.location.href = url;
+        // reset back to the prompt option (useful when navigating back)
+        e.target.selectedIndex = 0;
+      });
     });
   </script>
 </body>
